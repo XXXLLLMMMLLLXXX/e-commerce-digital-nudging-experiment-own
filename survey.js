@@ -1,7 +1,7 @@
 // ====== КОНФИГУРАЦИЯ ======
 const CONFIG = {
   // URL вашего Google Apps Script Web App
-  GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbx3xgQKAFzq6zQ0CSqGUCr2yVEmCG2SIy03Wd4wAJLeKjTremNTALJsGKt2LYSp82jt6g/exec',
+  GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbylAjyhtWSg-Y_U202Dpqt_DRMfJxIG9gHvzb_N-kZSazvPqo5YedeUj7uJRaesaQgT/exec',
   
   // Альтернативный URL thank-you страницы
   THANK_YOU_URL: 'thank-you.html',
@@ -594,3 +594,4 @@ window.addEventListener('beforeunload', () => {
   logInteraction('page_unload', 'survey', 'incomplete');
   log('Survey page unloading. Duration:', (Date.now() - surveyState.formStartTs) / 1000, 'seconds');
 });
+
