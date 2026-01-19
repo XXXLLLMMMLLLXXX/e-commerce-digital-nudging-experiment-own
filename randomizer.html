@@ -152,23 +152,45 @@
 
     <script>
         function startExperiment() {
-            // ====== ГЕНЕРАЦИЯ УНИКАЛЬНОГО PARTICIPANT ID ======
-            // Формат: P + timestamp + случайная строка
-            // Пример: P1737049856789_k8j3x2
-            const timestamp = Date.now();
-            const randomStr = Math.random().toString(36).substring(2, 8);
-            const participantId = `P${timestamp}_${randomStr}`;
+            // ====== PROLIFIC INTEGRATION ======
+            // Получаем параметры из URL (если есть)
+            const urlParams = new URLSearchParams(window.location.search);
+            const prolificPID = urlParams.get('PROLIFIC_PID') || urlParams.get('prolific_pid');
+            const studyID = urlParams.get('STUDY_ID') || urlParams.get('study_id');
+            const sessionID = urlParams.get('SESSION_ID') || urlParams.get('session_id');
             
-            // Сохраняем в sessionStorage (на случай если нужно будет восстановить)
+            // ====== ГЕНЕРАЦИЯ PARTICIPANT ID ======
+            let participantId;
+            
+            if (prolificPID) {
+                // Если это Prolific участник - используем Prolific PID
+                participantId = prolificPID;
+                console.log('✅ Prolific participant detected');
+                console.log('🆔 Prolific PID:', prolificPID);
+                console.log('📚 Study ID:', studyID);
+                console.log('🔑 Session ID:', sessionID);
+            } else {
+                // Если НЕ Prolific (локальное тестирование) - генерируем свой ID
+                const timestamp = Date.now();
+                const randomStr = Math.random().toString(36).substring(2, 8);
+                participantId = `P${timestamp}_${randomStr}`;
+                console.log('ℹ️ Local testing mode (no Prolific PID)');
+                console.log('🆔 Generated Participant ID:', participantId);
+            }
+            
+            // Сохраняем в sessionStorage
             sessionStorage.setItem('participantId', participantId);
-            
-            console.log('🆔 Generated Participant ID:', participantId);
+            if (prolificPID) {
+                sessionStorage.setItem('prolificPID', prolificPID);
+                sessionStorage.setItem('studyID', studyID);
+                sessionStorage.setItem('sessionID', sessionID);
+            }
             
             // ====== ССЫЛКИ НА ВАШИ 4 СТРАНИЦЫ ======
             // ⚠️ ВАЖНО: Замените на ВАШИ реальные URL!
             const experimentPages = [
                 {
-                    url: 'control.html',  // Замените на полный URL если нужно
+                    url: 'control.html',
                     group: 'control',
                     groupId: 1
                 },
@@ -193,8 +215,19 @@
             const randomIndex = Math.floor(Math.random() * experimentPages.length);
             const selectedPage = experimentPages[randomIndex];
 
-            // ====== ФОРМИРУЕМ URL С ПАРАМЕТРАМИ (включая participantId!) ======
-            const experimentURL = `${selectedPage.url}?participantId=${participantId}&group=${selectedPage.group}&groupId=${selectedPage.groupId}`;
+            // ====== ФОРМИРУЕМ URL С ПАРАМЕТРАМИ ======
+            let experimentURL = `${selectedPage.url}?participantId=${participantId}&group=${selectedPage.group}&groupId=${selectedPage.groupId}`;
+            
+            // Добавляем Prolific параметры если есть
+            if (prolificPID) {
+                experimentURL += `&prolificPID=${prolificPID}`;
+            }
+            if (studyID) {
+                experimentURL += `&studyID=${studyID}`;
+            }
+            if (sessionID) {
+                experimentURL += `&sessionID=${sessionID}`;
+            }
 
             // ====== ОТЛАДКА (видно в консоли F12) ======
             console.log('🎲 Selected group:', selectedPage.group);
