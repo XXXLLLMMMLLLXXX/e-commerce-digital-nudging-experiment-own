@@ -116,6 +116,65 @@
       margin-bottom: 30px;
     }
 
+    /* PROLIFIC CODE BOX */
+    .prolific-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 30px 0;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    .prolific-box h2 {
+      color: white;
+      font-size: 20px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .prolific-box p {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .completion-code {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 28px;
+      font-weight: bold;
+      color: #2a5bd7;
+      letter-spacing: 2px;
+      border: 3px dashed #2a5bd7;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .completion-code:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(42, 91, 215, 0.3);
+    }
+
+    .copy-hint {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .redirect-notice {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 15px;
+      color: white;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
     .info-box {
       background: #f8f9fb;
       border-radius: 12px;
@@ -179,7 +238,14 @@
       text-decoration: underline;
     }
 
-    .close-button {
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .button {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       border: none;
@@ -188,18 +254,27 @@
       font-weight: 600;
       border-radius: 50px;
       cursor: pointer;
-      margin-top: 20px;
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
 
-    .close-button:hover {
+    .button:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
     }
 
-    .close-button:active {
+    .button:active {
       transform: translateY(0);
+    }
+
+    .button-secondary {
+      background: #f8f9fb;
+      color: #12131a;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-secondary:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
     .footer-note {
@@ -209,7 +284,7 @@
       font-style: italic;
     }
 
-    /* Мобильная адаптация */
+    /* Mobile */
     @media (max-width: 768px) {
       .container {
         padding: 40px 30px;
@@ -223,39 +298,17 @@
         font-size: 16px;
       }
 
-      .checkmark-container {
-        width: 70px;
-        height: 70px;
-        margin-bottom: 25px;
-      }
-
-      .checkmark {
-        width: 70px;
-        height: 70px;
-      }
-
-      .info-box {
-        padding: 20px;
-      }
-
-      .info-box h2 {
-        font-size: 16px;
-      }
-
-      .info-box p {
-        font-size: 14px;
-      }
-
-      .contact-info {
+      .completion-code {
+        font-size: 24px;
         padding: 16px;
       }
 
-      .contact-info h3 {
-        font-size: 15px;
+      .button-group {
+        flex-direction: column;
       }
 
-      .contact-info p {
-        font-size: 13px;
+      .button {
+        width: 100%;
       }
     }
 
@@ -275,44 +328,18 @@
         margin-bottom: 25px;
       }
 
-      .checkmark-container {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 20px;
-      }
-
-      .checkmark {
-        width: 60px;
-        height: 60px;
-      }
-
-      .info-box {
-        padding: 18px;
-        margin: 25px 0;
-      }
-
-      .info-box h2 {
-        font-size: 15px;
-        margin-bottom: 12px;
-      }
-
-      .info-box p {
-        font-size: 13px;
-      }
-
-      .contact-info {
+      .completion-code {
+        font-size: 20px;
         padding: 14px;
-        margin: 20px 0;
+        letter-spacing: 1px;
       }
 
-      .close-button {
-        padding: 12px 28px;
-        font-size: 15px;
+      .prolific-box {
+        padding: 24px 20px;
       }
 
-      .footer-note {
-        font-size: 12px;
-        margin-top: 20px;
+      .prolific-box h2 {
+        font-size: 18px;
       }
     }
   </style>
@@ -333,6 +360,22 @@
       Ihre Antworten wurden erfolgreich übermittelt. Wir schätzen Ihre Zeit und Ihr wertvolles Feedback sehr.
     </p>
 
+    <!-- PROLIFIC COMPLETION CODE -->
+    <div class="prolific-box" id="prolificBox">
+      <h2>📋 Ihr Prolific Completion Code:</h2>
+      <p>Bitte kopieren Sie diesen Code und fügen Sie ihn in Prolific ein, um Ihre Vergütung zu erhalten:</p>
+      
+      <div class="completion-code" id="completionCode" onclick="copyCode()">
+        C1A2B3D4
+      </div>
+      
+      <p class="copy-hint" id="copyHint">👆 Klicken Sie auf den Code, um ihn zu kopieren</p>
+      
+      <div class="redirect-notice" id="redirectNotice">
+        Sie werden in <span id="countdown">10</span> Sekunden automatisch zu Prolific weitergeleitet...
+      </div>
+    </div>
+
     <div class="info-box">
       <h2>Was passiert jetzt?</h2>
       <p>
@@ -350,14 +393,17 @@
       <h3>Bei Fragen oder Anmerkungen:</h3>
       <p>
         <strong>Friedrich-Schiller-Universität Jena</strong><br>
-        
+        Lehrstuhl für Wirtschaftsinformatik
       </p>
       <p>
         E-Mail: <a href="mailto:leonid.popkov@uni-jena.de">leonid.popkov@uni-jena.de</a>
       </p>
     </div>
 
-    <button class="close-button" onclick="closeWindow()">Fenster schließen</button>
+    <div class="button-group">
+      <button class="button" onclick="returnToProlific()">Zurück zu Prolific</button>
+      <button class="button button-secondary" onclick="closeWindow()">Fenster schließen</button>
+    </div>
 
     <p class="footer-note">
       Sie können dieses Fenster jetzt schließen.
@@ -365,38 +411,155 @@
   </div>
 
   <script>
-    // Проверяем что опрос был завершён
+    // ====== PROLIFIC INTEGRATION ======
+    
+    // WICHTIG: Ersetzen Sie diesen Code durch Ihren echten Prolific Completion Code!
+    const PROLIFIC_COMPLETION_CODE = 'C1A2B3D4'; // ← HIER IHREN CODE EINFÜGEN!
+    
+    // Prolific-spezifische URL-Parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const prolificPID = urlParams.get('prolific_pid') || urlParams.get('PROLIFIC_PID');
+    const studyID = urlParams.get('study_id') || urlParams.get('STUDY_ID');
+    const sessionID = urlParams.get('session_id') || urlParams.get('SESSION_ID');
+    
+    // Prolific Completion URL
+    const PROLIFIC_COMPLETION_URL = `https://app.prolific.com/submissions/complete?cc=${PROLIFIC_COMPLETION_CODE}`;
+    
+    // Check if this is a Prolific participant
+    const isProlificParticipant = !!(prolificPID || studyID || sessionID);
+    
+    console.log('Prolific Participant:', isProlificParticipant);
+    console.log('PID:', prolificPID);
+    
+    // ====== INITIALIZATION ======
     window.addEventListener('load', () => {
       const completed = sessionStorage.getItem('surveyCompleted');
       
       if (completed) {
         console.log('✅ Survey completed successfully');
-        
-        // Опционально: очищаем данные после успешного завершения
-        // sessionStorage.removeItem('experimentData');
-        // sessionStorage.removeItem('participantId');
       } else {
         console.warn('⚠️ Direct access to thank-you page');
       }
+      
+      // Show/hide Prolific box based on participant source
+      if (isProlificParticipant) {
+        console.log('✅ Prolific participant detected');
+        document.getElementById('prolificBox').style.display = 'block';
+        
+        // Update completion code display
+        document.getElementById('completionCode').textContent = PROLIFIC_COMPLETION_CODE;
+        
+        // Start countdown for auto-redirect
+        startCountdown();
+      } else {
+        console.log('ℹ️ Not a Prolific participant');
+        document.getElementById('prolificBox').style.display = 'none';
+      }
     });
-
+    
+    // ====== COPY CODE TO CLIPBOARD ======
+    function copyCode() {
+      const codeElement = document.getElementById('completionCode');
+      const code = codeElement.textContent;
+      
+      // Modern way (works in most browsers)
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+          showCopySuccess();
+        }).catch(err => {
+          console.error('Copy failed:', err);
+          fallbackCopy(code);
+        });
+      } else {
+        // Fallback for older browsers
+        fallbackCopy(code);
+      }
+    }
+    
+    function fallbackCopy(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      
+      try {
+        document.execCommand('copy');
+        showCopySuccess();
+      } catch (err) {
+        console.error('Fallback copy failed:', err);
+        alert('Bitte kopieren Sie den Code manuell: ' + text);
+      }
+      
+      document.body.removeChild(textarea);
+    }
+    
+    function showCopySuccess() {
+      const hint = document.getElementById('copyHint');
+      hint.textContent = '✅ Code kopiert!';
+      hint.style.color = '#4BB543';
+      
+      setTimeout(() => {
+        hint.textContent = '👆 Klicken Sie auf den Code, um ihn zu kopieren';
+        hint.style.color = 'rgba(255, 255, 255, 0.8)';
+      }, 2000);
+    }
+    
+    // ====== COUNTDOWN & AUTO-REDIRECT ======
+    let countdown = 10;
+    let countdownInterval;
+    
+    function startCountdown() {
+      countdownInterval = setInterval(() => {
+        countdown--;
+        document.getElementById('countdown').textContent = countdown;
+        
+        if (countdown <= 0) {
+          clearInterval(countdownInterval);
+          returnToProlific();
+        }
+      }, 1000);
+    }
+    
+    // ====== RETURN TO PROLIFIC ======
+    function returnToProlific() {
+      if (isProlificParticipant) {
+        console.log('Redirecting to Prolific...');
+        window.location.href = PROLIFIC_COMPLETION_URL;
+      } else {
+        console.log('Not a Prolific participant, closing window');
+        closeWindow();
+      }
+    }
+    
+    // ====== CLOSE WINDOW ======
     function closeWindow() {
-      // Пробуем закрыть окно
+      // Try to close window
       window.close();
       
-      // Если не получилось (современные браузеры могут блокировать),
-      // перенаправляем на главную страницу эксперимента
+      // If that doesn't work (modern browsers block this),
+      // redirect to experiment start
       setTimeout(() => {
-        // Можете заменить на вашу главную страницу
         window.location.href = 'randomizer.html';
       }, 500);
     }
-
-    // Предотвращаем возврат назад
+    
+    // ====== PREVENT BACK NAVIGATION ======
     history.pushState(null, null, location.href);
     window.addEventListener('popstate', () => {
       history.pushState(null, null, location.href);
     });
+    
+    // ====== LOG COMPLETION DATA ======
+    if (prolificPID) {
+      console.log('=== PROLIFIC COMPLETION DATA ===');
+      console.log('Participant ID:', prolificPID);
+      console.log('Study ID:', studyID);
+      console.log('Session ID:', sessionID);
+      console.log('Completion Code:', PROLIFIC_COMPLETION_CODE);
+      console.log('Completion URL:', PROLIFIC_COMPLETION_URL);
+    }
   </script>
 </body>
 </html>
