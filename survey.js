@@ -1,6 +1,6 @@
 // ====== КОНФИГУРАЦИЯ ======
 const CONFIG = {
-  GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbylAjyhtWSg-Y_U202Dpqt_DRMfJxIG9gHvzb_N-kZSazvPqo5YedeUj7uJRaesaQgT/exec',
+  GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbwNcL_TL8Tic4ZH1HpBQylUmN_vx_Wg-OCzdCS32kl7z42X_NWYdsQ0_lGuHG3KLyc2/exec',
   THANK_YOU_URL: 'thank-you.html',
   DEBUG: true
 };
@@ -516,4 +516,5 @@ window.addEventListener('beforeunload', () => {
   logInteraction('page_unload', 'survey', 'incomplete');
   log('Survey page unloading. Duration:', (Date.now() - surveyState.formStartTs) / 1000, 'seconds');
 });
+
 
