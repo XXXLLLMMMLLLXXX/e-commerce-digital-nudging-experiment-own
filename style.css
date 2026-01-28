@@ -92,25 +92,35 @@ body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial
 
 .add-btn{ width: fit-content; }
 
-/* ===== SOCIAL PROOF - ЗОЛОТОЙ БЕЙДЖ ===== */
+/* ===== SOCIAL PROOF - ГОЛУБОЙ "ДОВЕРИЕ" БЕЙДЖ ===== */
 .social-proof{
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  background: linear-gradient(135deg, #cce5ff 0%, #b3d9ff 100%);
   border-radius: 8px;
-  border: 2px solid #f4c430;
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+  border: 2px solid #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
   margin-top: 6px;
   animation: fadeInScale 0.5s ease-out;
 }
 
-/* Иконка огонька перед звёздами */
+/* Иконка галочки перед звёздами */
 .social-proof::before {
-  content: "🔥";
-  font-size: 16px;
-  margin-right: -4px;
+  content: "✓";
+  background: #007bff;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 4px;
+  flex-shrink: 0;
 }
 
 /* ⭐ ЗВЁЗДЫ */
@@ -120,7 +130,6 @@ body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial
   font-size: 18px;
   line-height: 1;
   letter-spacing: 2px;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
 .star{
@@ -158,7 +167,7 @@ body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial
 .rating-count{
   font-size: 14px;
   font-weight: 600;
-  color: #654321;
+  color: #004085;
 }
 
 .star.full{ color:#f5b301; }
